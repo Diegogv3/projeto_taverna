@@ -1,5 +1,13 @@
 // Abre o modal do endereço quando o botão de enviar é clicado
 document.getElementById('enviarPedidoBtn').addEventListener('click', function() {
+    // Verifica se o carrinho tem itens antes de abrir o modal
+    let carrinho = localStorage.getItem('carrinho');
+    if (!carrinho || JSON.parse(carrinho).length === 0) {
+        alert("Seu carrinho está vazio. Adicione itens antes de prosseguir.");
+        return;
+    }
+
+    // Abre o modal do endereço
     let modal = new bootstrap.Modal(document.getElementById('enderecoModal'));
     modal.show();
 });
@@ -90,6 +98,12 @@ function enviarPedidoWhatsApp() {
 
     // Criando a URL para redirecionar ao WhatsApp
     const url = "https://wa.me/" + numeroWhatsApp + "?text=" + encodeURIComponent(mensagem);
+
+    // Removendo os itens do localStorage
+    localStorage.removeItem('carrinho');
+    localStorage.removeItem('dadosPedido');
+    localStorage.removeItem('resumoPedidos');
+    localStorage.removeItem('ultimaCategoria');
 
     // Abrindo o WhatsApp com a mensagem pronta
     window.open(url, "_blank");
