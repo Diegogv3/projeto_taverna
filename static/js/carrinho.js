@@ -6,6 +6,13 @@ $(document).ready(function () {
     $(document).on("click", ".btn-payment", function () {
         $(".btn-payment").removeClass("ativo");
         $(this).addClass("ativo");
+        let forma_pagamento = $(this).text().replace(/\s+/g, '');
+        localStorage.setItem("FormaPagamento",JSON.stringify(forma_pagamento));
+        console.log(forma_pagamento);
+    });
+
+    $(document).on("click", ".voltar", function () {
+        localStorage.removeItem("FormaPagamento");
     });
 
     if (carrinho.length > 0) {

@@ -2,8 +2,15 @@
 document.getElementById('enviarPedidoBtn').addEventListener('click', function() {
     // Verifica se o carrinho tem itens antes de abrir o modal
     let carrinho = localStorage.getItem('carrinho');
+
     if (!carrinho || JSON.parse(carrinho).length === 0) {
         alert("Seu carrinho está vazio. Adicione itens antes de prosseguir.");
+        return;
+    }
+
+    let formaPagamento = localStorage.getItem('FormaPagamento');
+    if (!formaPagamento || JSON.parse(formaPagamento).length === 0) {
+        alert("Por favor, selecione uma forma de pagamento.");
         return;
     }
 
@@ -78,6 +85,7 @@ function salvarDadosNoLocalStorage(endereco) {
 // Função para enviar o pedido via WhatsApp
 function enviarPedidoWhatsApp() {
     const dadosPedido = JSON.parse(localStorage.getItem('dadosPedido'));
+    const formaPagamentoSalva = JSON.parse(localStorage.getItem("FormaPagamento"));
 
     if (!dadosPedido) {
         console.log("Nenhum pedido armazenado.");
@@ -89,11 +97,11 @@ function enviarPedidoWhatsApp() {
 
     // Criando a mensagem formatada
     const mensagem = 
-        "Pedido n° 001\n\n" +
-        "Itens:\n" + dadosPedido.itens + "\n\n" +
+        "\nItens:\n" + dadosPedido.itens + "\n\n" +
         "🛵Delivery (taxa de: R$ 2,99)\n" +
         "🏠 " + dadosPedido.endereco + " (Estimativa: entre 30~70 minutos)\n\n" +
-        "Total: R$ " + dadosPedido.total + "\n\n" +
+        "Total: R$ " + dadosPedido.total + "\n" +
+        "Forma de pagamento: " + formaPagamentoSalva + "\n\n" +
         "Obrigado pela preferência, se precisar de algo é só chamar!😉\n";
 
     // Criando a URL para redirecionar ao WhatsApp
@@ -104,7 +112,9 @@ function enviarPedidoWhatsApp() {
     localStorage.removeItem('dadosPedido');
     localStorage.removeItem('resumoPedidos');
     localStorage.removeItem('ultimaCategoria');
+    localStorage.removeItem("FormaPagamento");
 
     // Abrindo o WhatsApp com a mensagem pronta
     window.open(url, "_blank");
+    location.reload();
 }

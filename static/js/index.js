@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
+    localStorage.removeItem("FormaPagamento");
     const botoes = document.querySelectorAll('.nav-item a');
     const titulo = document.querySelector("header h4");
     const offcanvasNavbar = new bootstrap.Offcanvas(document.getElementById('offcanvasNavbar2')); // Obtendo o menu lateral
