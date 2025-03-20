@@ -1,0 +1,28 @@
+.btn{
+    font-family: "Caprasimo", serif;
+    font-weight: 400;
+    font-style: normal;
+    background-color:#FDF3C8;
+}
+
+.btn:hover {
+    background-color: #ff9900; /* Cor ao passar o mouse */
+    color: white;
+}
+
+.quadrado{
+    justify-content: center;
+    align-items: center;
+}
+
+/* Em telas pequenas (como celular em modo retrato), a imagem ocupa 100% da largura */
+.img-fluid {
+    width: 100%;
+}
+
+/* Quando a tela está em modo paisagem (largura maior que altura) */
+@media (orientation: landscape) {
+    .img-fluid {
+        width: 45% !important; /* Ajuste para o tamanho desejado */
+    }
+}

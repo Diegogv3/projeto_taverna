@@ -1,0 +1,157 @@
+* {
+    user-select: none;
+    -webkit-user-select: none; 
+    -moz-user-select: none; 
+    -ms-user-select: none;
+}
+
+header a {
+    color: inherit; /* Herda a cor do elemento pai, mantendo a cor original */
+    text-decoration: none; /* Remove o sublinhado padrão do link */
+}
+
+header a:hover {
+    color: #1e80e9; /* Define a cor quando o link for "hovered" (passado o mouse) */
+}
+
+.contador::-webkit-outer-spin-button,
+.contador::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.excluir{
+    display: none;
+}
+
+.contador {
+    width: 50px; 
+}
+
+.card-corpo{
+    max-height: 100%;
+    max-width: 700px;
+    align-items: center; 
+    justify-content: center;
+}
+
+.imagem{
+    margin: auto !important;
+}
+
+.textos-card{
+    align-items: center;
+    justify-content: center;
+}
+
+header{
+    background-color: #4F4D4D;
+}
+
+.nav-item a{
+    color: white;
+}
+
+.imagens-card img{
+    width: 100%;
+    height: fill;
+}
+
+.nav-item a{
+    font-family: "Caprasimo", serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.card-header h4{ /*titulo cards (nome da comida)*/
+    color: #535252;
+}
+
+.card-body h5{ /*titulo cards (nome da comida)*/
+    color: #343434;
+}
+
+.add-cart {
+    background: linear-gradient(#4F4D4D 8%, #141414 100%) !important;
+    transition: opacity 0.25s ease !important;
+}
+
+.add-cart:hover {
+    opacity: 0.85;
+}
+
+.preço{
+    color: #6A6A6A;
+    width: 120px;
+}
+
+.card-body .paragrafo{
+    color: #858585;
+    padding: auto;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Limita a 2 linhas */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.card-title{
+    color: #858585;
+    padding: auto;
+    display: -webkit-box;
+    -webkit-line-clamp: 1; /* Limita a 2 linhas */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.mais:hover,
+.menos:hover{
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+.card-corpo .row{
+    width: 100%;
+}
+
+@media (max-width: 576px){
+    .t{
+        position: relative !important;
+    }
+    .card-corpo{
+        height: 100%;
+    }
+    .listra{
+        display: none;
+    }
+    
+    .teste{
+        justify-content: end;
+    }
+    .preço{
+        margin-right: auto !important;
+    }
+    .banner1 img {
+        content: url('../../../static/img/mobile/carousel/carousel-mob1.png');
+    }
+    .banner2 img {
+        content: url('../../../static/img/mobile/carousel/carousel-mob2.png');
+    }
+    .banner3 img {
+        content: url('../../../static/img/mobile/carousel/carousel-mob3.png');
+    }
+}
+
+@media (max-width: 768px){
+    .card-corpo{
+        max-height: 100%;
+    }
+    .listra{
+        display: none;
+    }
+}
+
+@media (max-width: 1025px){
+    .card-corpo{
+        max-height: 100%;
+    }
+}
