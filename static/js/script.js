@@ -3,14 +3,20 @@ document.getElementById('enviarPedidoBtn').addEventListener('click', function() 
     // Verifica se o carrinho tem itens antes de abrir o modal
     let carrinho = localStorage.getItem('carrinho');
 
+    function mostrarAlerta(mensagem) {
+        document.getElementById("alertaTexto").innerText = mensagem;
+        let modalAlerta = new bootstrap.Modal(document.getElementById("modalAlerta"));
+        modalAlerta.show();
+    }
+
     if (!carrinho || JSON.parse(carrinho).length === 0) {
-        alert("Seu carrinho está vazio. Adicione itens antes de prosseguir.");
+        mostrarAlerta("Seu carrinho está vazio. Adicione itens antes de prosseguir.");
         return;
     }
 
     let formaPagamento = localStorage.getItem('FormaPagamento');
     if (!formaPagamento || JSON.parse(formaPagamento).length === 0) {
-        alert("Por favor, selecione uma forma de pagamento.");
+        mostrarAlerta("Por favor, selecione uma forma de pagamento.");
         return;
     }
 

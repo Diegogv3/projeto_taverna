@@ -15,6 +15,9 @@ header a {
     text-decoration: none;
     transition: color 0.2s ease;
 }
+.AR h4{
+    margin: 0;
+}
 .AR:hover {
     color: #ff5733;
     text-decoration: none;

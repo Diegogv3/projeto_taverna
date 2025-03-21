@@ -80,6 +80,14 @@ document.addEventListener("DOMContentLoaded", function () {
                             quantidade = input.value;
                             atualizarPreco(preçoElement, preçoNumerico, quantidade)
                         }
+                        else{
+                            function mostrarAlerta(mensagem) {
+                                document.getElementById("alertaTexto").innerText = mensagem;
+                                let modalAlerta = new bootstrap.Modal(document.getElementById("modalAlerta"));
+                                modalAlerta.show();
+                            }
+                            mostrarAlerta("O valor do contador deve ser no mínimo 1");
+                        }
                     });
                 }
             });

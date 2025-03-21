@@ -118,8 +118,7 @@ $(document).ready(function () {
         $("#pagamento").html("<p>Sem pedidos no momento.</p>").show();
     }
 
-    $(document).on("click touchstart", ".excluir", function (event) {
-        event.preventDefault();
+    $(document).on("click", ".excluir", function () {
 
         let idProduto = $(this).closest(".card").attr("id");
 
