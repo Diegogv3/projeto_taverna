@@ -67,7 +67,7 @@ function salvarDadosNoLocalStorage(endereco) {
     let textoFinal = teste2.map(item => {
         let precoTotal = item.precoTotal;
         total += precoTotal;
-        return `➡️ ${item.quantidade}x ${item.nome} (R$ ${item.precoUnitario.toFixed(2).replace('.', ',')}) - R$ ${precoTotal.toFixed(2).replace('.', ',')}`;
+        return `${item.quantidade}x ${item.nome} (R$ ${item.precoUnitario.toFixed(2).replace('.', ',')}) - R$ ${precoTotal.toFixed(2).replace('.', ',')}`;
     }).join('\n'); // Quebra de linha entre os itens
 
     console.log(textoFinal);
@@ -98,11 +98,11 @@ function enviarPedidoWhatsApp() {
     // Criando a mensagem formatada
     const mensagem = 
         "Itens:\n" + dadosPedido.itens + "\n\n" +
-        "🛵Delivery (taxa de: R$ 2,99)\n" +
-        "🏠 " + dadosPedido.endereco + " (Estimativa: entre 30~70 minutos)\n\n" +
+        "Delivery (taxa de: R$ 2,99)\n" +
+        dadosPedido.endereco + " (Estimativa: entre 30~70 minutos)\n\n" +
         "Forma de pagamento: " + formaPagamentoSalva + "\n" +
         "Total: R$ " + dadosPedido.total + "\n\n" +
-        "Obrigado pela preferência, se precisar de algo é só chamar!😉\n";
+        "Obrigado pela preferência, se precisar de algo é só chamar!\n";
 
     // Criando a URL para redirecionar ao WhatsApp
     const url = "https://wa.me/" + numeroWhatsApp + "?text=" + encodeURIComponent(mensagem);
