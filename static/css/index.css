@@ -10,6 +10,16 @@ header a {
     text-decoration: none; /* Remove o sublinhado padrão do link */
 }
 
+.AR {
+    color: inherit; /* Herda a cor do elemento pai, mantendo a cor original */
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+.AR:hover {
+    color: #ff5733;
+    text-decoration: none;
+}
+
 header a:hover {
     color: #1e80e9; /* Define a cor quando o link for "hovered" (passado o mouse) */
 }
