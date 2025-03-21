@@ -97,11 +97,11 @@ function enviarPedidoWhatsApp() {
 
     // Criando a mensagem formatada
     const mensagem = 
-        "\nItens:\n" + dadosPedido.itens + "\n\n" +
+        "Itens:\n" + dadosPedido.itens + "\n\n" +
         "🛵Delivery (taxa de: R$ 2,99)\n" +
         "🏠 " + dadosPedido.endereco + " (Estimativa: entre 30~70 minutos)\n\n" +
-        "Total: R$ " + dadosPedido.total + "\n" +
-        "Forma de pagamento: " + formaPagamentoSalva + "\n\n" +
+        "Forma de pagamento: " + formaPagamentoSalva + "\n" +
+        "Total: R$ " + dadosPedido.total + "\n\n" +
         "Obrigado pela preferência, se precisar de algo é só chamar!😉\n";
 
     // Criando a URL para redirecionar ao WhatsApp
