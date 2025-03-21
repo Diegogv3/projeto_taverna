@@ -59,8 +59,8 @@
 }
 
 .add-cart,
-svg {
-    display: none;
+.AR {
+    display: none !important;
 }
 .teste svg{
     display: inherit;
