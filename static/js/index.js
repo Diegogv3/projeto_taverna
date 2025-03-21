@@ -86,7 +86,7 @@ document.addEventListener("DOMContentLoaded", function () {
                                 let modalAlerta = new bootstrap.Modal(document.getElementById("modalAlerta"));
                                 modalAlerta.show();
                             }
-                            mostrarAlerta("O valor do contador deve ser no mínimo 1");
+                            mostrarAlerta("Adicione a quantidade!");
                         }
                     });
                 }
