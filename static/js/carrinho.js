@@ -8,7 +8,6 @@ $(document).ready(function () {
         $(this).addClass("ativo");
         let forma_pagamento = $(this).text().replace(/\s+/g, '');
         localStorage.setItem("FormaPagamento",JSON.stringify(forma_pagamento));
-        console.log(forma_pagamento);
     });
 
     $(document).on("click", ".voltar", function () {
@@ -50,8 +49,7 @@ $(document).ready(function () {
                 let textoFinal = listaPedidos.map(item => {
                     return `➡️ ${item.quantidade}x ${item.nome} (R$ ${item.precoUnitario.toFixed(2).replace('.', ',')}) - R$ ${item.precoTotal.toFixed(2).replace('.', ',')}`;
                 }).join(' \n'); // Adicionando a setinha e separando por linha
-                
-                console.log(textoFinal);
+
             }
             atualizarResumoCarrinho();
             atualizarResumojson();
@@ -124,8 +122,6 @@ $(document).ready(function () {
         event.preventDefault();
 
         let idProduto = $(this).closest(".card").attr("id");
-
-        console.log("ID do produto:", idProduto);
 
         carrinho = carrinho.filter(item => item.produtoId !== idProduto);
 
