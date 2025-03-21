@@ -76,6 +76,9 @@ document.addEventListener("DOMContentLoaded", function () {
                         if (input.value > 0){
                             localStorage.setItem("carrinho", JSON.stringify(carrinho));
                             $('#modalConfirmacao').modal('show');
+                            input.value = 0;
+                            quantidade = input.value;
+                            atualizarPreco(preçoElement, preçoNumerico, quantidade)
                         }
                     });
                 }
