@@ -3,6 +3,20 @@ $(document).ready(function () {
     let total = 0;
     let resumoPedidos = ''; // Move isso para fora do loop para acumular os pedidos corretamente.
 
+    function formatarCard() {
+        $(".textos-card").removeClass("row-cols-sm-1 w-100").addClass("row-cols-2 w-100");
+        $(".teste").removeClass("ms-sm-0 ms-md-4");
+        $(".card-corpo").addClass("mb-3");
+        $(".image").removeClass("col-12 col-sm-4");
+        $(".texts-c").removeClass("col-12 col-sm-8");
+
+        $(".image").addClass("col-sm-5 col-6 col-md-6");
+        $(".image img").removeClass("pe-sm-2 pt-sm-2 p-0");
+        $(".card-title").removeClass("ms-sm-3");
+        $(".card-title").addClass("fs-5");
+        $(".texts-c").addClass("col-sm-7 col-6 col-md-6");
+    }
+
     $(document).on("click", ".btn-payment", function () {
         $(".btn-payment").removeClass("ativo");
         $(this).addClass("ativo");
@@ -17,7 +31,38 @@ $(document).ready(function () {
     if (carrinho.length > 0) {
         carrinho.forEach(item => {
 
-            function atualizarResumojson() {
+            function AtualizarPreco() {
+                let precoAtt = $(`#${item.produtoId} .preço`);
+                if (precoAtt.length) {
+                    precoAtt.text(`R$ ${item.preço.toFixed(2).replace('.', ',')}`);
+                }
+
+                let contadorInput = $(`#${item.produtoId} .contador`);
+                if (contadorInput.length) {
+                    contadorInput.val(item.contadorValor);
+
+                    let btnIncrementar = $(`#${item.produtoId} .incrementar`);
+                    let btnDecrementar = $(`#${item.produtoId} .decrementar`);
+
+                    btnIncrementar.on("click", function () {
+                        atualizarQuantidade(item, contadorInput, 1);
+                        AtualizarResumoJson();
+                    });
+
+                    btnDecrementar.on("click", function () {
+                        atualizarQuantidade(item, contadorInput, -1);
+                        AtualizarResumoJson();
+                    });
+
+                    contadorInput.on("input blur", function () {
+                        let valorDigitado = parseInt(contadorInput.val()) || 1;
+                        contadorInput.val(Math.min(Math.max(valorDigitado, 1), 99));
+                        atualizarQuantidadeDiretamente(item, contadorInput);
+                    });
+                }
+            }
+
+            function AtualizarResumoJson() {
                 let listaPedidos = [];
                 
                 carrinho.forEach(item => {
@@ -52,49 +97,13 @@ $(document).ready(function () {
 
             }
             atualizarResumoCarrinho();
-            atualizarResumojson();
+            AtualizarResumoJson();
 
             $("#pagamento").append(item.cardHtml);
+            
+            formatarCard();
 
-            $(".textos-card").removeClass("row-cols-sm-1 w-100").addClass("row-cols-2 w-100");
-            $(".teste").removeClass("ms-sm-0 ms-md-4");
-            $(".card-corpo").addClass("mb-3");
-            $(".image").removeClass("col-12 col-sm-4");
-            $(".texts-c").removeClass("col-12 col-sm-8");
-            $(".image").addClass("col-sm-5 col-6 col-md-6");
-            $(".image img").removeClass("pe-sm-2 pt-sm-2 p-0");
-            $(".card-title").removeClass("ms-sm-3");
-            $(".card-title").addClass("fs-5");
-            $(".texts-c").addClass("col-sm-7 col-6 col-md-6");
-
-            let precoAtt = $(`#${item.produtoId} .preço`);
-            if (precoAtt.length) {
-                precoAtt.text(`R$ ${item.preço.toFixed(2).replace('.', ',')}`);
-            }
-
-            let contadorInput = $(`#${item.produtoId} .contador`);
-            if (contadorInput.length) {
-                contadorInput.val(item.contadorValor);
-
-                let btnIncrementar = $(`#${item.produtoId} .incrementar`);
-                let btnDecrementar = $(`#${item.produtoId} .decrementar`);
-
-                btnIncrementar.on("click", function () {
-                    atualizarQuantidade(item, contadorInput, 1);
-                    atualizarResumojson();
-                });
-
-                btnDecrementar.on("click", function () {
-                    atualizarQuantidade(item, contadorInput, -1);
-                    atualizarResumojson();
-                });
-
-                contadorInput.on("input blur", function () {
-                    let valorDigitado = parseInt(contadorInput.val()) || 1;
-                    contadorInput.val(Math.min(Math.max(valorDigitado, 1), 99));
-                    atualizarQuantidadeDiretamente(item, contadorInput);
-                });
-            }
+            AtualizarPreco();
 
             let precoUnitario = item.preço / item.contadorValor;
             resumoPedidos += `
