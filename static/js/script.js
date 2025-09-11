@@ -3,20 +3,20 @@ document.getElementById('enviarPedidoBtn').addEventListener('click', function() 
     // Verifica se o carrinho tem itens antes de abrir o modal
     let carrinho = localStorage.getItem('carrinho');
 
-    function mostrarAlerta(mensagem) {
+    function MostrarAlerta(mensagem) {
         document.getElementById("alertaTexto").innerText = mensagem;
         let modalAlerta = new bootstrap.Modal(document.getElementById("modalAlerta"));
         modalAlerta.show();
     }
 
     if (!carrinho || JSON.parse(carrinho).length === 0) {
-        mostrarAlerta("Seu carrinho está vazio. Adicione itens antes de prosseguir.");
+        MostrarAlerta("Seu carrinho está vazio. Adicione itens antes de prosseguir.");
         return;
     }
 
     let formaPagamento = localStorage.getItem('FormaPagamento');
     if (!formaPagamento || JSON.parse(formaPagamento).length === 0) {
-        mostrarAlerta("Por favor, selecione uma forma de pagamento.");
+        MostrarAlerta("Por favor, selecione uma forma de pagamento.");
         return;
     }
 
@@ -45,18 +45,18 @@ document.getElementById('formEndereco').addEventListener('submit', function(even
     const endereco = `${rua}, Nº ${numero} - ${bairro}${referencia ? `, Ref: ${referencia}` : ''}`;
 
     // Salva os dados no localStorage
-    salvarDadosNoLocalStorage(endereco);
+    SalvarDados(endereco);
 
     // Fecha o modal após confirmar
     let modal = bootstrap.Modal.getInstance(document.getElementById('enderecoModal'));
     modal.hide();
 
     // Enviar o pedido via WhatsApp
-    enviarPedidoWhatsApp();
+    EnviarPedido();
 });
 
 // Função para salvar os dados no localStorage
-function salvarDadosNoLocalStorage(endereco) {
+function SalvarDados(endereco) {
     let teste = localStorage.getItem('resumoPedidos');
 
     if (!teste) {
@@ -89,7 +89,7 @@ function salvarDadosNoLocalStorage(endereco) {
 }
 
 // Função para enviar o pedido via WhatsApp
-function enviarPedidoWhatsApp() {
+function EnviarPedido() {
     const dadosPedido = JSON.parse(localStorage.getItem('dadosPedido'));
     const formaPagamentoSalva = JSON.parse(localStorage.getItem("FormaPagamento"));
 

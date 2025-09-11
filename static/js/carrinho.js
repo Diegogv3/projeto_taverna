@@ -3,7 +3,7 @@ $(document).ready(function () {
     let total = 0;
     let resumoPedidos = ''; // Move isso para fora do loop para acumular os pedidos corretamente.
 
-    function formatarCard() {
+    function FormatarCard() {
         $(".textos-card").removeClass("row-cols-sm-1 w-100").addClass("row-cols-2 w-100");
         $(".teste").removeClass("ms-sm-0 ms-md-4");
         $(".card-corpo").addClass("mb-3");
@@ -45,19 +45,19 @@ $(document).ready(function () {
                     let btnDecrementar = $(`#${item.produtoId} .decrementar`);
 
                     btnIncrementar.on("click", function () {
-                        atualizarQuantidade(item, contadorInput, 1);
+                        AtualizarQuantidade(item, contadorInput, 1);
                         AtualizarResumoJson();
                     });
 
                     btnDecrementar.on("click", function () {
-                        atualizarQuantidade(item, contadorInput, -1);
+                        AtualizarQuantidade(item, contadorInput, -1);
                         AtualizarResumoJson();
                     });
 
                     contadorInput.on("input blur", function () {
                         let valorDigitado = parseInt(contadorInput.val()) || 1;
                         contadorInput.val(Math.min(Math.max(valorDigitado, 1), 99));
-                        atualizarQuantidadeDiretamente(item, contadorInput);
+                        AtualizarQuantidadeDiretamente(item, contadorInput);
                     });
                 }
             }
@@ -96,12 +96,12 @@ $(document).ready(function () {
                 }).join(' \n'); // Adicionando a setinha e separando por linha
 
             }
-            atualizarResumoCarrinho();
+            AtualizarResumoCarrinho();
             AtualizarResumoJson();
 
             $("#pagamento").append(item.cardHtml);
             
-            formatarCard();
+            FormatarCard();
 
             AtualizarPreco();
 
@@ -133,39 +133,39 @@ $(document).ready(function () {
 
         carrinho = carrinho.filter(item => item.produtoId !== idProduto);
 
-        atualizarLocalStorage();
+        AtualizarLocalStorage();
 
         $(this).closest(".card").remove();
 
-        atualizarResumoCarrinho();
+        AtualizarResumoCarrinho();
     });
 
-    function atualizarQuantidade(item, contadorInput, incremento) {
+    function AtualizarQuantidade(item, contadorInput, incremento) {
         let novoValor = Math.min(Math.max(parseInt(contadorInput.val()) + incremento, 1), 99);
         item.preço = (item.preço / item.contadorValor) * novoValor;
         item.contadorValor = novoValor;
         contadorInput.val(novoValor);
 
         $(`#${item.produtoId} .preço`).text(`R$ ${item.preço.toFixed(2).replace('.', ',')}`);
-        atualizarLocalStorage();
-        atualizarResumoCarrinho();
+        AtualizarLocalStorage();
+        AtualizarResumoCarrinho();
     }
 
-    function atualizarQuantidadeDiretamente(item, contadorInput) {
+    function AtualizarQuantidadeDiretamente(item, contadorInput) {
         let novoValor = Math.min(Math.max(parseInt(contadorInput.val()), 1), 99);
         item.preço = (item.preço / item.contadorValor) * novoValor;
         item.contadorValor = novoValor;
 
         $(`#${item.produtoId} .preço`).text(`R$ ${item.preço.toFixed(2).replace('.', ',')}`);
-        atualizarLocalStorage();
-        atualizarResumoCarrinho();
+        AtualizarLocalStorage();
+        AtualizarResumoCarrinho();
     }
 
-    function atualizarLocalStorage() {
+    function AtualizarLocalStorage() {
         localStorage.setItem("carrinho", JSON.stringify(carrinho));
     }
 
-    function atualizarResumoCarrinho() {
+    function AtualizarResumoCarrinho() {
         let total = 0;
         let resumoPedidos = '';
 

@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const titulo = document.querySelector("header h4");
     const offcanvasNavbar = new bootstrap.Offcanvas(document.getElementById('offcanvasNavbar2')); // Obtendo o menu lateral
     
-    function atualizarPreco(preçoElement, preçoNumerico, quantidade) {
+    function AtualizarPreco(preçoElement, preçoNumerico, quantidade) {
         if (quantidade == 0){
             const preçoAtual = preçoNumerico;
             preçoElement.textContent = `R$ ${preçoAtual.toFixed(2).replace('.', ',')}`;
@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
         return preçoAtual;
     }
 
-    function carregarCategoria(categoria) {
+    function CarregarCategoria(categoria) {
         let categoria_selecionada = categoria.getAttribute("data-categoria");
         let url = `${categoria_selecionada}.html`;
         console.log("URL:", url);
@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         let valor = parseInt(input.value);
                         if (valor < 99) {
                             input.value = valor + 1;
-                            atualizarPreco(preçoElement, preçoNumerico, input.value);
+                            AtualizarPreco(preçoElement, preçoNumerico, input.value);
                         }
                     });
 
@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         let valor = parseInt(input.value);
                         if (valor > 0) {
                             input.value = valor - 1;
-                            atualizarPreco(preçoElement, preçoNumerico, input.value);
+                            AtualizarPreco(preçoElement, preçoNumerico, input.value);
                         }
                     });
                 }
@@ -78,7 +78,7 @@ document.addEventListener("DOMContentLoaded", function () {
                             $('#modalConfirmacao').modal('show');
                             input.value = 0;
                             quantidade = input.value;
-                            atualizarPreco(preçoElement, preçoNumerico, quantidade)
+                            AtualizarPreco(preçoElement, preçoNumerico, quantidade)
                         }
                         else{
                             function mostrarAlerta(mensagem) {
@@ -100,14 +100,14 @@ document.addEventListener("DOMContentLoaded", function () {
     botoes.forEach(botao => {
         botao.addEventListener("click", function (event) {
             event.preventDefault();
-            carregarCategoria(botao);
+            CarregarCategoria(botao);
         });
     });
 
     const categoriaSalva = localStorage.getItem('ultimaCategoria') || 'plebeus-smash';
     const categoriaInicial = document.querySelector(`.nav-item a[data-categoria='${categoriaSalva}']`);
     if (categoriaInicial) {
-        carregarCategoria(categoriaInicial);
+        CarregarCategoria(categoriaInicial);
     }
 
     document.getElementById("irParacarrinho").addEventListener("click", function () {
